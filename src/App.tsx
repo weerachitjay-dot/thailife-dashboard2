@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { LayoutDashboard, Activity, BarChart2, DollarSign, Settings as SettingsIcon } from 'lucide-react';
+import { LayoutDashboard, Activity, BarChart2, DollarSign, ShieldCheck } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/supabase';
-import Settings from './pages/Settings';
+import Admin from './pages/Admin';
 
 // Real Data Component
 const CommandCenter = () => {
@@ -71,7 +71,7 @@ function App() {
           </nav>
 
           <div className="border-t pt-2">
-            <NavLink to="/settings" icon={<SettingsIcon size={20} />} label="Settings" />
+            <NavLink to="/admin" icon={<ShieldCheck size={20} />} label="Admin" />
           </div>
         </aside>
 
@@ -82,7 +82,7 @@ function App() {
             <Route path="/performance" element={<PerformanceLab />} />
             <Route path="/deep-analysis" element={<DeepAnalysis />} />
             <Route path="/metrics" element={<BusinessMetrics />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
       </div>
