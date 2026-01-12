@@ -14,7 +14,7 @@ const CommandCenter = () => {
       const { data: performance, error } = await supabase
         .from('product_performance_daily')
         .select('*')
-        .order('report_date', { ascending: false })
+        .order('date', { ascending: false })
         .limit(20);
 
       if (error) console.error('Error fetching data:', error);
@@ -33,13 +33,13 @@ const CommandCenter = () => {
         {data.map((row) => (
           <div key={row.id} className="border p-4 rounded shadow bg-card text-card-foreground">
             <div className="flex justify-between">
-              <span className="font-bold">{row.product_name}</span>
-              <span className="text-muted-foreground">{row.report_date}</span>
+              <span className="font-bold">{row.product_code || row.product_name}</span>
+              <span className="text-muted-foreground">{row.date}</span>
             </div>
             <div className="mt-2 grid grid-cols-3 gap-2 text-sm">
-              <div>Spend: ฿{row.spend}</div>
-              <div>Leads (Meta): {row.leads_meta}</div>
-              <div>CPL: ฿{row.leads_meta ? (row.spend / row.leads_meta).toFixed(0) : 0}</div>
+              <div>Spend: ฿{Number(row.spend).toLocaleString()}</div>
+              <div>Leads: {row.meta_leads}</div>
+              <div>CPL: ฿{row.meta_leads ? (row.spend / row.meta_leads).toFixed(0) : 0}</div>
             </div>
           </div>
         ))}
